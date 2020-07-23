@@ -2,23 +2,27 @@
 session_start();
 include_once 'conexao.php';
 
+$cpfcnpj  = filter_input(INPUT_POST, 'cpfcnpj', FILTER_SANITIZE_NUMBER_INT);
 $nome    = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-$email   = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-$telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_NUMBER_INT);
+$endereco   = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_SPECIAL_CHARS);
+$datanasc  = filter_input(INPUT_POST, 'datanasc' );
+$titulo  = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
+$valor  = filter_input(INPUT_POST, 'valor', FILTER_VALIDATE_FLOAT);
+$datavenc = filter_input(INPUT_POST, 'datavenc');
 
 $querySelect = $link->query("SELECT email from tb_clientes");
 $array_emails = [];
 
-while ($emails = $querySelect->fetch_assoc()) :
-    $emails_existentes = $emails['email'];
-    array_push($array_emails, $emails_existentes);
+while ($cpfcnpjs = $querySelect->fetch_assoc()) :
+    $cpfcnpjs_existentes = $cpfcnpjs['cpfcnpj'];
+    array_push($array_cpfcnpjs, $cpfcnpjs_existentes);
 endwhile;
 
-if (in_array($email, $array_emails)) :
-    $_SESSION['msg'] = "<p class='center red-text'>" . "Cliente já cadastrado com esse email" . "</p>";
+if (in_array($cpfcnpj, $array_cpfcnpjs)) :
+    $_SESSION['msg'] = "<p class='center red-text'>" . "Cliente já cadastrado com esse CPF/CNPJ" . "</p>";
     header("Location:../");
 else :
-    $queryInsert = $link->query("insert into tb_clientes values (default, '$nome', '$email','$telefone')");
+    $queryInsert = $link->query("insert into tb_clientes values (default, '$cpfcnpj', '$nome', '$endereco','$datanasc', '$titulo', '$valor', '$datavenc')");
     $affected_rows = mysqli_affected_rows($link);
     if ($affected_rows > 0) :
         $_SESSION['msg'] = "<p class='center green-text'>" . "Cadastro efetuado com sucesso" . "</p>";

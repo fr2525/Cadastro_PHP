@@ -14,13 +14,25 @@ include_once 'includes/menu.inc.php' ;
 
     $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
     $_SESSION['id'] = $id;
-    $querySelect = $link->query("select id,nome,email,telefone from tb_clientes where id='$id'");
+    $querySelect = $link->query("select id
+                                        ,cpfcnpj
+                                        ,nome
+                                        ,endereco
+                                        ,datanasc
+                                        ,titulo
+                                        ,valor
+                                        ,datavenc 
+                                 from tb_clientes where id='$id'");
 
     while($registros = $querySelect->fetch_assoc()):
         $id = $registros['id'];
+        $cpfcnpj  = $registros['cpfcnpj'];
         $nome = $registros['nome'];
-        $email = $registros['email'];
-        $telefone = $registros['telefone'];
+        $endereco = $registros['endereco'];
+        $datanasc = $registros['datanasc'];
+        $titulo = $registros['titulo'];
+        $valor = $registros['valor'];
+        $datavenc = $registros['datavenc'];
     endwhile;    
     
 ?>
@@ -37,6 +49,13 @@ include_once 'includes/menu.inc.php' ;
             endif;
             ?>
 
+            <!-- Campo CPF/CNPJ -->
+            <div class="input-field col s12">
+                <i class="material-icons prefix">fingerprint</i>
+                <input type="text" name="cpfcnpj" id="cpfcnpj" value="<?php echo $cpfcnpj ?>" maxlength="20" required autofocus>
+                <label for="cpfcnpj">CPF/CNPJ</label>
+            </div>
+            
             <!-- Campo Nome -->
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
@@ -44,19 +63,41 @@ include_once 'includes/menu.inc.php' ;
                 <label for="nome">Nome do cliente</label>
             </div>
 
-            <!-- Campo email -->
+            <!-- Campo endereço -->
             <div class="input-field col s12">
                 <i class="material-icons prefix">email</i>
-                <input type="text" name="email" id="email" value="<?php echo $email ?>" maxlength="50" required>
-                <label for="email">e-mail</label>
+                <input type="text" name="endereco" id="endereco" value="<?php echo $endereco ?>"maxlength="100" required>
+                <label for="endereco">Endereco</label>
             </div>
 
-            <!-- Campo Telefone -->
+            <!-- Campo Dt.Nasc -->
             <div class="input-field col s12">
-                <i class="material-icons prefix">call</i>
-                <input type="text" name="telefone" id="telefone" value="<?php echo $telefone ?>" maxlength="15" required>
-                <label for="email">telefone</label>
+                <i class="material-icons prefix">date_range</i>
+                <input type="text" name="datanasc" id="datanasc" value="<?php echo $datanasc ?>" maxlength="10" required>
+                <label for="datanasc">Dt.Nasc.</label>
             </div>
+
+            <!-- Campo Titulo -->
+            <div class="input-field col s12">
+                <i class="material-icons prefix"></i>
+                <input type="text" name="titulo" id="titulo" value="<?php echo $titulo ?>" maxlength="50" required>
+                <label for="titulo">Titulo.</label>
+            </div>
+
+            <!-- Campo valor -->
+            <div class="input-field col s12">
+                <i class="material-icons prefix">monetization_on</i>
+                <input type="text" name="valor" id="valor" value="<?php echo $valor ?>" maxlength="20" required>
+                <label for="valor">Valor</label>
+            </div>
+
+            <!-- Campo Dt.Vencimento -->
+            <div class="input-field col s12">
+                <i class="material-icons prefix">date_range</i>
+                <input type="text" name="datavenc" id="datavenc" maxlength="10" required>
+                <label for="datavenc">Dt.Vencto.</label>
+            </div>
+
 
             <!-- Botões -->
             <div class="input-field col s12">

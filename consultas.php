@@ -10,9 +10,13 @@
         <table class="striped">
             <thead>
                 <tr>
+                    <th>CPF/CNPJ</th>
                     <th>Nome</th>
-                    <th>Email</th>
-                    <th>Telefone</th>
+                    <th>Endereço</th>
+                    <th>Dt.Nasc.</th>
+                    <th>Titulo</th>
+                    <th>Valor</th>
+                    <th>dt.Venc.</th>
                 </tr>
             </thead>
             <tbody>
