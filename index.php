@@ -12,8 +12,6 @@ and open the template in the editor.
 ?>
 
 <div class="row container">
-    <p>&nbsp;</p>
-    <div  class="row container">
     <form action="banco_de_dados/create.php" method="post" class="col s12">
         <fieldset class="formulario" style="padding: 15px">
             <legend><img src="imagens/avatar-1.png" width="50"></legend>
@@ -26,18 +24,26 @@ and open the template in the editor.
             endif;
             ?>
 
-            <!-- Campo CPF/CNPJ -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">fingerprint</i>
-                <input type="text" name="cpfcnpj" id="cpfcnpj" maxlength="20" required autofocus>
-                <label for="cpfcnpj">CPF/CNPJ</label>
-            </div>
+            <div class="row">
+                <!-- Campo CPF/CNPJ -->
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">fingerprint</i>
+                    <input type="text" name="cpfcnpj" id="cpfcnpj" maxlength="20" required autofocus>
+                    <label for="cpfcnpj">CPF/CNPJ</label>
+                </div>
+                <!-- Campo Nome -->
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input type="text" name="nome" id="nome" maxlength="40" required autofocus>
+                    <label for="nome">Nome do cliente</label>
+                </div>
+                <!-- Campo Dt.Nasc -->
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="date" name="datanasc" id="datanasc" class="datepicker" required="">
+                    <label for="datanasc">Dt.Nasc.</label>
+                </div>
 
-            <!-- Campo Nome -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">account_circle</i>
-                <input type="text" name="nome" id="nome" maxlength="40" required autofocus>
-                <label for="nome">Nome do cliente</label>
             </div>
 
             <!-- Campo endereço -->
@@ -47,12 +53,6 @@ and open the template in the editor.
                 <label for="endereco">Endereco</label>
             </div>
 
-            <!-- Campo Dt.Nasc -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">date_range</i>
-                <input type="text" name="datanasc" id="datanasc" maxlength="10" required>
-                <label for="datanasc">Dt.Nasc.</label>
-            </div>
 
             <!-- Campo Titulo -->
             <div class="input-field col s12">
@@ -61,18 +61,20 @@ and open the template in the editor.
                 <label for="titulo">Titulo.</label>
             </div>
 
-            <!-- Campo valor -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">monetization_on</i>
-                <input type="text" name="valor" id="valor" maxlength="20" required>
-                <label for="valor">Valor</label>
-            </div>
+            <div class="row">
+                <!-- Campo valor -->
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">monetization_on</i>
+                    <input type="text" name="valor" id="valor" maxlength="20" required>
+                    <label for="valor">Valor</label>
+                </div>
 
-            <!-- Campo Dt.Vencimento -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">date_range</i>
-                <input type="text" name="datavenc" id="datavenc" maxlength="10" required>
-                <label for="datavenc">Dt.Vencto.</label>
+                <!-- Campo Dt.Vencimento -->
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="date" name="datavenc" id="datavenc" class="datepicker" required="">
+                    <label for="datavenc">Dt.Vencto.</label>
+                </div>
             </div>
 
             <!-- Botões -->
@@ -84,6 +86,6 @@ and open the template in the editor.
         </fieldset>
     </form>
 </div>
-</div>
+
 <?php include_once('includes/footer.inc.php')
 ?>

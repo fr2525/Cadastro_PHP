@@ -1,20 +1,23 @@
 <?php
 session_start();
 include_once 'includes/header.inc.php';
-include_once 'includes/menu.inc.php' ;
+include_once 'includes/menu.inc.php';
 ?>
 
+<!--
 <div class="row container">
     <div class="col s12">
         <h5 class="light"> Edição de Registros </h5><hr>
     </div>    
-</div>    
-<?php 
-    include_once('banco_de_dados/conexao.php');
+</div>  
+-->
 
-    $id = filter_input(INPUT_GET,'id',FILTER_SANITIZE_NUMBER_INT);
-    $_SESSION['id'] = $id;
-    $querySelect = $link->query("select id
+<?php
+include_once('banco_de_dados/conexao.php');
+
+$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+$_SESSION['id'] = $id;
+$querySelect = $link->query("select id
                                         ,cpfcnpj
                                         ,nome
                                         ,endereco
@@ -24,20 +27,21 @@ include_once 'includes/menu.inc.php' ;
                                         ,datavenc 
                                  from tb_clientes where id='$id'");
 
-    while($registros = $querySelect->fetch_assoc()):
-        $id = $registros['id'];
-        $cpfcnpj  = $registros['cpfcnpj'];
-        $nome = $registros['nome'];
-        $endereco = $registros['endereco'];
-        $datanasc = $registros['datanasc'];
-        $titulo = $registros['titulo'];
-        $valor = $registros['valor'];
-        $datavenc = $registros['datavenc'];
-    endwhile;    
-    
+while ($registros = $querySelect->fetch_assoc()) :
+    $id = $registros['id'];
+    $cpfcnpj  = $registros['cpfcnpj'];
+    $nome = $registros['nome'];
+    $endereco = $registros['endereco'];
+    $datanasc = $registros['datanasc'];
+    $titulo = $registros['titulo'];
+    $valor = $registros['valor'];
+    $datavenc = $registros['datavenc'];
+endwhile;
+
 ?>
 
-<form action="banco_de_dados/update.php" method="post" class="col s12">
+<div class="row container">
+    <form action="banco_de_dados/update.php" method="post" class="col s12">
         <fieldset class="formulario" style="padding: 15px">
             <legend><img src="imagens/avatar-1.png" width="50"></legend>
             <h5 class="light center">Alteração de Clientes</h5>
@@ -50,32 +54,35 @@ include_once 'includes/menu.inc.php' ;
             ?>
 
             <!-- Campo CPF/CNPJ -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">fingerprint</i>
-                <input type="text" name="cpfcnpj" id="cpfcnpj" value="<?php echo $cpfcnpj ?>" maxlength="20" required autofocus>
-                <label for="cpfcnpj">CPF/CNPJ</label>
-            </div>
-            
-            <!-- Campo Nome -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">account_circle</i>
-                <input type="text" name="nome" id="nome" value="<?php echo $nome ?>" maxlength="40" required autofocus>
-                <label for="nome">Nome do cliente</label>
+            <div class="row">
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">fingerprint</i>
+                    <input type="text" name="cpfcnpj" id="cpfcnpj" value="<?php echo $cpfcnpj ?>" maxlength="20" required autofocus>
+                    <label for="cpfcnpj">CPF/CNPJ</label>
+                </div>
+
+                <!-- Campo Nome -->
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input type="text" name="nome" id="nome" value="<?php echo $nome ?>" maxlength="40" required autofocus>
+                    <label for="nome">Nome do cliente</label>
+                </div>
+                <!-- Campo Dt.Nasc -->
+                <div class="input-field col s3">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="date" name="datanasc" id="datanasc" value="<?php echo $datanasc ?>" class="datepicker" required="">
+                    <label for="datanasc">Dt.Nasc.</label>
+                </div>
+
             </div>
 
             <!-- Campo endereço -->
             <div class="input-field col s12">
                 <i class="material-icons prefix">email</i>
-                <input type="text" name="endereco" id="endereco" value="<?php echo $endereco ?>"maxlength="100" required>
+                <input type="text" name="endereco" id="endereco" value="<?php echo $endereco ?>" maxlength="100" required>
                 <label for="endereco">Endereco</label>
             </div>
 
-            <!-- Campo Dt.Nasc -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">date_range</i>
-                <input type="text" name="datanasc" id="datanasc" value="<?php echo $datanasc ?>" maxlength="10" required>
-                <label for="datanasc">Dt.Nasc.</label>
-            </div>
 
             <!-- Campo Titulo -->
             <div class="input-field col s12">
@@ -84,20 +91,21 @@ include_once 'includes/menu.inc.php' ;
                 <label for="titulo">Titulo.</label>
             </div>
 
-            <!-- Campo valor -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">monetization_on</i>
-                <input type="text" name="valor" id="valor" value="<?php echo $valor ?>" maxlength="20" required>
-                <label for="valor">Valor</label>
-            </div>
+            <div class="row">
+                <!-- Campo valor -->
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">monetization_on</i>
+                    <input type="text" name="valor" id="valor" value="<?php echo $valor ?>" maxlength="20" required>
+                    <label for="valor">Valor</label>
+                </div>
 
-            <!-- Campo Dt.Vencimento -->
-            <div class="input-field col s12">
-                <i class="material-icons prefix">date_range</i>
-                <input type="text" name="datavenc" id="datavenc" maxlength="10" required>
-                <label for="datavenc">Dt.Vencto.</label>
+                <!-- Campo Dt.Vencimento -->
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">date_range</i>
+                    <input type="date" name="datavenc" id="datavenc" class="datepicker" required="">
+                    <label for="datavenc">Dt.Vencto.</label>
+                </div>
             </div>
-
 
             <!-- Botões -->
             <div class="input-field col s12">
@@ -108,4 +116,5 @@ include_once 'includes/menu.inc.php' ;
         </fieldset>
     </form>
 </div>
+
 <?php include_once('includes/footer.inc.php') ?>
