@@ -18,14 +18,14 @@ include_once('banco_de_dados/conexao.php');
 $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 $_SESSION['id'] = $id;
 $querySelect = $link->query("select id
-                                        ,cpfcnpj
-                                        ,nome
-                                        ,endereco
-                                        ,datanasc
-                                        ,titulo
-                                        ,valor
-                                        ,datavenc 
-                                 from tb_clientes where id='$id'");
+                                   ,cpfcnpj
+                                   ,nome
+                                   ,endereco
+                                   ,datanasc
+                                   ,titulo
+                                   ,valor
+                                   ,datavenc 
+                             from tb_clientes where id='$id'");
 
 while ($registros = $querySelect->fetch_assoc()) :
     $id = $registros['id'];
@@ -102,7 +102,7 @@ endwhile;
                 <!-- Campo Dt.Vencimento -->
                 <div class="input-field col s6">
                     <i class="material-icons prefix">date_range</i>
-                    <input type="date" name="datavenc" id="datavenc" class="datepicker" required="">
+                    <input type="date" name="datavenc" id="datavenc" value="<?php echo $datavenc ?>" class="datepicker" required="">
                     <label for="datavenc">Dt.Vencto.</label>
                 </div>
             </div>
