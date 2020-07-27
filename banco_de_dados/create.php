@@ -10,20 +10,21 @@ $titulo  = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
 $valor  = filter_input(INPUT_POST, 'valor', FILTER_VALIDATE_FLOAT);
 $datavenc = filter_input(INPUT_POST, 'datavenc');
 
-$querySelect = $link->query("SELECT email from tb_clientes");
-$array_emails = [];
+$querySelect = $link->query("SELECT cpfcnpj from tb_clientes where cpfcnpj = '$cpfcnpj'");
 
-while ($cpfcnpjs = $querySelect->fetch_assoc()) :
-    $cpfcnpjs_existentes = $cpfcnpjs['cpfcnpj'];
-    array_push($array_cpfcnpjs, $cpfcnpjs_existentes);
-endwhile;
+$affected_rows = mysqli_affected_rows($link);
 
-if (in_array($cpfcnpj, $array_cpfcnpjs)) :
+if ($affected_rows > 0 ):
     $_SESSION['msg'] = "<p class='center red-text'>" . "Cliente já cadastrado com esse CPF/CNPJ" . "</p>";
-    header("Location:../");
+    header("Location: ../consultas.php");
 else :
-    $queryInsert = $link->query("insert into tb_clientes values (default, '$cpfcnpj', '$nome', '$endereco','$datanasc', '$titulo', '$valor', '$datavenc')");
+    //$affected_rows = 0;
+    $str_sql = "insert into tb_clientes (cpfcnpj,nome,datanasc,endereco,titulo,valor,datavenc) 
+                                 values ( $cpfcnpj,'$nome', '$datanasc','$endereco', '$titulo', $valor, '$datavenc')";
+    echo " str =  " . $str_sql;
+    $queryInsert = $link->query($str_sql);
     $affected_rows = mysqli_affected_rows($link);
+    echo "affected_rows = " . $affected_rows; 
     if ($affected_rows > 0) :
         $_SESSION['msg'] = "<p class='center green-text'>" . "Cadastro efetuado com sucesso" . "</p>";
         header("Location:../");

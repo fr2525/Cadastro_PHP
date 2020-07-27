@@ -5,10 +5,22 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<?php include_once('includes/header.inc.php')
-?>
+<?php
+//include_once 'banco_de_dados/conexao.class.php';
 
-<?php include_once('includes/menu.inc.php')
+//$conexaoOk = false;
+
+//$conectando = new conexao();
+
+//$conexaoOk = $conectando->connect();
+
+//$conectando->disconnect();
+
+//If (!$conexaoOk)
+//    die("Conexão ao banco falhou, entre em contato com a T.I.");
+//?>
+<?php include_once('includes/header.inc.php');
+      include_once('includes/menu.inc.php');
 ?>
 
 <div class="row container">
@@ -49,15 +61,14 @@ and open the template in the editor.
             <!-- Campo endereço -->
             <div class="input-field col s12">
                 <i class="material-icons prefix">email</i>
-                <input type="text" name="endereco" id="endereco" maxlength="100" required>
+                <input type="text" name="endereco" id="endereco" maxlength="50" required="">
                 <label for="endereco">Endereco</label>
             </div>
-
 
             <!-- Campo Titulo -->
             <div class="input-field col s12">
                 <i class="material-icons prefix"></i>
-                <input type="text" name="titulo" id="titulo" maxlength="50" required>
+                <input type="text" name="titulo" id="titulo" maxlength="50" required="">
                 <label for="titulo">Titulo.</label>
             </div>
 
@@ -65,7 +76,7 @@ and open the template in the editor.
                 <!-- Campo valor -->
                 <div class="input-field col s6">
                     <i class="material-icons prefix">monetization_on</i>
-                    <input type="text" name="valor" id="valor" maxlength="20" required>
+                    <input type="text" name="valor" id="valor" maxlength="20" required="">
                     <label for="valor">Valor</label>
                 </div>
 
@@ -87,5 +98,5 @@ and open the template in the editor.
     </form>
 </div>
 
-<?php include_once('includes/footer.inc.php')
+<?php include_once('includes/footer.inc.php');
 ?>
