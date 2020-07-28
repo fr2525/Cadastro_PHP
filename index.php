@@ -5,26 +5,12 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<?php
-//include_once 'banco_de_dados/conexao.class.php';
-
-//$conexaoOk = false;
-
-//$conectando = new conexao();
-
-//$conexaoOk = $conectando->connect();
-
-//$conectando->disconnect();
-
-//If (!$conexaoOk)
-//    die("Conexão ao banco falhou, entre em contato com a T.I.");
-//?>
 <?php include_once('includes/header.inc.php');
-      include_once('includes/menu.inc.php');
+include_once('includes/menu.inc.php');
 ?>
 
 <div class="row container">
-    <form action="banco_de_dados/create.php" method="post" class="col s12">
+    <form action="banco_de_dados/create.php" id="formCliente" method="post" class="col s12" onsubmit="critica()">
         <fieldset class="formulario" style="padding: 15px">
             <legend><img src="imagens/avatar-1.png" width="50"></legend>
             <h5 class="light center">Cadastro de Clientes</h5>
@@ -40,13 +26,13 @@ and open the template in the editor.
                 <!-- Campo CPF/CNPJ -->
                 <div class="input-field col s3">
                     <i class="material-icons prefix">fingerprint</i>
-                    <input type="text" name="cpfcnpj" id="cpfcnpj" maxlength="20" required autofocus>
+                    <input type="text" name="cpfcnpj" id="cpfcnpj" maxlength="20" required="" autofocus>
                     <label for="cpfcnpj">CPF/CNPJ</label>
                 </div>
                 <!-- Campo Nome -->
                 <div class="input-field col s6">
                     <i class="material-icons prefix">account_circle</i>
-                    <input type="text" name="nome" id="nome" maxlength="40" required autofocus>
+                    <input type="text" name="nome" id="nome" maxlength="40" required="" autofocus>
                     <label for="nome">Nome do cliente</label>
                 </div>
                 <!-- Campo Dt.Nasc -->

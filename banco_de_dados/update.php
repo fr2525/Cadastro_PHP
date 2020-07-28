@@ -9,7 +9,7 @@ $nome    = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
 $endereco   = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_SPECIAL_CHARS);
 $datanasc  = filter_input(INPUT_POST, 'datanasc' );
 $titulo  = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_SPECIAL_CHARS);
-$valor  = filter_input(INPUT_POST, 'valor', FILTER_VALIDATE_FLOAT);
+$valor  = str_replace(',','.', $_POST['valor']);
 $datavenc = filter_input(INPUT_POST, 'datavenc');
 
 $queryUpdate = $link->query("update tb_clientes SET cpfcnpj = '$cpfcnpj'
